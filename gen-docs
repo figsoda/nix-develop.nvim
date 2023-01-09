@@ -1,0 +1,4 @@
+#!/bin/sh
+nix run nixpkgs#lemmy-help \
+    --experimental-features "nix-command flakes" \
+    -- lua/nix-develop/init.lua -fact > doc/nix-develop.txt

@@ -1,0 +1,56 @@
+==============================================================================
+`nix develop` for neovim                                           *nix-develop*
+
+                                                              *nix-develop.nvim*
+                                                                   *:NixDevelop*
+https://github.com/figsoda/nix-develop.nvim
+>
+:NixDevelop
+:NixDevelop .#dev-shell
+:NixDevelop --impure
+<
+
+ignored_variables                                *nix-develop.ignored_variables*
+    >lua
+    require("nix-develop").ignored_variables["SHELL"] = false
+    <
+
+
+separated_variables                            *nix-develop.separated_variables*
+    >lua
+    require("nix-develop").separated_variables["LUA_PATH"] = ":"
+    <
+
+
+M.enter_dev_env({cmd}, {args})                       *nix-develop.enter_dev_env*
+    Enter a development environment
+
+    Parameters: ~
+        {cmd}   (string)
+        {args}  (string[])
+
+    Returns: ~
+        (nil)
+
+    Usage: ~
+>lua
+        require("nix-develop").enter_dev_env("nix", {"print-dev-env", "--json"})
+<
+
+
+M.nix_develop({args})                                  *nix-develop.nix_develop*
+    Enter a development environment a la `nix develop`
+
+    Parameters: ~
+        {args}  (string[])  Extra arguments to pass to `nix print-dev-env`
+
+    Returns: ~
+        (nil)
+
+    Usage: ~
+>lua
+        require("nix-develop").nix_develop({".#dev-shell", "--impure"})
+<
+
+
+vim:tw=78:ts=8:noet:ft=help:norl:
