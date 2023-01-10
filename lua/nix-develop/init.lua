@@ -119,6 +119,8 @@ end
 function M.nix_develop(args)
   M.enter_dev_env("nix", {
     "print-dev-env",
+    "--extra-experimental-features",
+    "nix-command flakes",
     "--json",
     unpack(args),
   })
