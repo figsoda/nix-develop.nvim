@@ -23,13 +23,23 @@ local loop = vim.loop
 ---<
 ---@class ignored_variables
 M.ignored_variables = {
+  BASHOPTS = true,
   HOME = true,
+  NIX_BUILD_TOP = true,
+  NIX_ENFORCE_PURITY = true,
+  NIX_LOG_FD = true,
+  NIX_REMOTE = true,
+  PPID = true,
+  SHELL = true,
+  SHELLOPTS = true,
+  SSL_CERT_FILE = true,
   TEMP = true,
   TEMPDIR = true,
+  TERM = true,
   TMP = true,
   TMPDIR = true,
   TZ = true,
-  SHELL = true,
+  UID = true,
 }
 
 --->lua
