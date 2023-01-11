@@ -5,8 +5,11 @@
 ---https://github.com/figsoda/nix-develop.nvim
 --->
 ---:NixDevelop
----:NixDevelop .#dev-shell
+---:RiffShell
+---
+---:NixDevelop .#foo
 ---:NixDevelop --impure
+---:RiffShell --project-dir foo
 ---<
 ---@brief ]]
 
@@ -115,12 +118,24 @@ end
 ---Enter a development environment a la `nix develop`
 ---@param args string[] Extra arguments to pass to `nix print-dev-env`
 ---@return nil
----@usage `require("nix-develop").nix_develop({".#dev-shell", "--impure"})`
+---@usage `require("nix-develop").nix_develop({".#foo", "--impure"})`
 function M.nix_develop(args)
   M.enter_dev_env("nix", {
     "print-dev-env",
     "--extra-experimental-features",
     "nix-command flakes",
+    "--json",
+    unpack(args),
+  })
+end
+
+---Enter a development environment a la `riff shell`
+---@param args string[] Extra arguments to pass to `riff print-dev-env`
+---@return nil
+---@usage `require("nix-develop").riff_shell({"--project-dir", "foo"})`
+function M.riff_shell(args)
+  M.enter_dev_env("riff", {
+    "print-dev-env",
     "--json",
     unpack(args),
   })

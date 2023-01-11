@@ -4,8 +4,11 @@
 
 ```vim
 :NixDevelop
-:NixDevelop .#dev-shell
+:RiffShell
+
+:NixDevelop .#foo
 :NixDevelop --impure
+:RiffShell --project-dir foo
 ```
 
 See [nix-develop.txt](doc/nix-develop.txt) for more information

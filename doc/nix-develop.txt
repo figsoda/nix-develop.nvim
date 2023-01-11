@@ -6,8 +6,11 @@
 https://github.com/figsoda/nix-develop.nvim
 >
 :NixDevelop
-:NixDevelop .#dev-shell
+:RiffShell
+
+:NixDevelop .#foo
 :NixDevelop --impure
+:RiffShell --project-dir foo
 <
 
 ignored_variables                                *nix-develop.ignored_variables*
@@ -49,7 +52,22 @@ M.nix_develop({args})                                  *nix-develop.nix_develop*
 
     Usage: ~
 >lua
-        require("nix-develop").nix_develop({".#dev-shell", "--impure"})
+        require("nix-develop").nix_develop({".#foo", "--impure"})
+<
+
+
+M.riff_shell({args})                                    *nix-develop.riff_shell*
+    Enter a development environment a la `riff shell`
+
+    Parameters: ~
+        {args}  (string[])  Extra arguments to pass to `riff print-dev-env`
+
+    Returns: ~
+        (nil)
+
+    Usage: ~
+>lua
+        require("nix-develop").riff_shell({"--project-dir", "foo"})
 <
 
 
