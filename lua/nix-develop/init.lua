@@ -74,7 +74,7 @@ function M.enter_dev_env(cmd, args)
         string.format(
           "`%s` exited with exit code %d",
           table.concat(args, " "),
-          signal
+          code
         ),
         levels.WARN
       )
