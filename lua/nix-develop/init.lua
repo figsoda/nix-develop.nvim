@@ -110,6 +110,20 @@ function M.enter_dev_env(cmd, args)
     for name, value in pairs(vim.json.decode(data)["variables"]) do
       if value.type == "exported" then
         setenv(name, value.value)
+        if name == "shellHook" then
+          local stdin = loop.new_pipe()
+          loop.spawn("bash", {
+            stdio = { stdin, nil, nil },
+          }, function(code, signal)
+            if code ~= 0 then
+              vim.notify("shellHook failed with exit code %d", levels.WARN)
+            end
+            if signal ~= 0 then
+              vim.notify("shellHook interrupted with signal %d", levels.WARN)
+            end
+          end)
+          stdin:write(value.value)
+        end
       end
     end
     vim.notify("successfully entered development environment", levels.INFO)
