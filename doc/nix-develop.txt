@@ -6,10 +6,12 @@
 https://github.com/figsoda/nix-develop.nvim
 >
 :NixDevelop
+:NixShell
 :RiffShell
 
 :NixDevelop .#foo
 :NixDevelop --impure
+:NixShell nixpkgs#hello
 :RiffShell --project-dir foo
 <
 
@@ -53,6 +55,21 @@ M.nix_develop({args})                                  *nix-develop.nix_develop*
     Usage: ~
 >lua
         require("nix-develop").nix_develop({".#foo", "--impure"})
+<
+
+
+M.nix_shell({args})                                      *nix-develop.nix_shell*
+    Enter a development environment a la `nix shell`
+
+    Parameters: ~
+        {args}  (string[])  Extra arguments to pass to `nix build`
+
+    Returns: ~
+        (nil)
+
+    Usage: ~
+>lua
+        require("nix-develop").nix_shell({"nixpkgs#hello"})
 <
 
 

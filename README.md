@@ -4,10 +4,12 @@
 
 ```vim
 :NixDevelop
+:NixShell
 :RiffShell
 
 :NixDevelop .#foo
 :NixDevelop --impure
+:NixShell nixpkgs#hello
 :RiffShell --project-dir foo
 ```
 
