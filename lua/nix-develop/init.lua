@@ -144,9 +144,8 @@ function M.enter_dev_env(cmd, args)
         end
       end
     end
-    vim.notify("successfully entered development environment", levels.INFO)
   end)
-
+  vim.notify("successfully entered development environment", levels.INFO)
   read_stdout(opts)
 end
 
