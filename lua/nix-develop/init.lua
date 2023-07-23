@@ -20,6 +20,13 @@ local M = {}
 local levels = vim.log.levels
 local loop = vim.loop
 
+-- workaround for "nvim_echo must not be called in a lua loop callback"
+local notify = function(msg, level)
+  vim.schedule(function()
+    vim.notify(msg, level)
+  end)
+end
+
 --->lua
 ---require("nix-develop").ignored_variables["SHELL"] = false
 ---<
@@ -56,7 +63,7 @@ M.separated_variables = {
 local function check(cmd, args, code, signal)
   if code ~= 0 then
     table.insert(args, 1, cmd)
-    vim.notify(
+    notify(
       string.format(
         "`%s` exited with exit code %d",
         table.concat(args, " "),
@@ -69,7 +76,7 @@ local function check(cmd, args, code, signal)
 
   if signal ~= 0 then
     table.insert(args, 1, cmd)
-    vim.notify(
+    notify(
       string.format(
         "`%s` interrupted with signal %d",
         table.concat(args, " "),
@@ -101,7 +108,7 @@ end
 local function read_stdout(opts)
   loop.read_start(opts.stdout, function(err, chunk)
     if err then
-      vim.notify("Error when reading stdout: " .. err, levels.WARN)
+      notify("Error when reading stdout: " .. err, levels.WARN)
     end
     if chunk then
       opts.output = opts.output .. chunk
@@ -134,17 +141,17 @@ function M.enter_dev_env(cmd, args)
             stdio = { stdin, nil, nil },
           }, function(code, signal)
             if code ~= 0 then
-              vim.notify("shellHook failed with exit code %d", levels.WARN)
+              notify("shellHook failed with exit code %d", levels.WARN)
             end
             if signal ~= 0 then
-              vim.notify("shellHook interrupted with signal %d", levels.WARN)
+              notify("shellHook interrupted with signal %d", levels.WARN)
             end
           end)
           stdin:write(value.value)
         end
       end
     end
-    vim.notify("successfully entered development environment", levels.INFO)
+    notify("successfully entered development environment", levels.INFO)
   end)
 
   read_stdout(opts)
@@ -206,7 +213,7 @@ function M.nix_shell(args)
     end
 
     loop.os_setenv("PATH", path)
-    vim.notify("successfully entered development environment", levels.INFO)
+    notify("successfully entered development environment", levels.INFO)
   end)
 
   read_stdout(opts)
