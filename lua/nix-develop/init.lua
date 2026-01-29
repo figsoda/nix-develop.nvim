@@ -140,12 +140,7 @@ function M.enter_dev_env(cmd, args)
           loop.spawn("bash", {
             stdio = { stdin, nil, nil },
           }, function(code, signal)
-            if code ~= 0 then
-              notify("shellHook failed with exit code %d", levels.WARN)
-            end
-            if signal ~= 0 then
-              notify("shellHook interrupted with signal %d", levels.WARN)
-            end
+            check("shellHook", {}, code, signal)
           end)
           stdin:write(value.value)
         end
