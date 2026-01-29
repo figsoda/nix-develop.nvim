@@ -4,12 +4,24 @@
 
 ```vim
 :NixDevelop
-:NixShell
-:RiffShell
-
 :NixDevelop .#foo
 :NixDevelop --impure
+
+:NixShell
 :NixShell nixpkgs#hello
+```
+
+## [devenv](https://github.com/cachix/devenv) integration
+
+```vim
+:DevenvShell
+:DevenvShell --profile foo
+```
+
+## [riff (unmaintained)](https://github.com/DeterminateSystems/riff) integration
+
+```vim
+:RiffShell
 :RiffShell --project-dir foo
 ```
 
