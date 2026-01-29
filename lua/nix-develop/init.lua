@@ -157,6 +157,18 @@ function M.enter_dev_env(cmd, args)
   read_stdout(opts)
 end
 
+---Enter a development environment a la `devenv shell`
+---@param args string[] Extra arguments to pass to `devenv print-dev-env`
+---@return nil
+---@usage `require("nix-develop").devenv_shell({"--profile", "foo"})`
+function M.devenv_shell(args)
+  M.enter_dev_env("devenv", {
+    "print-dev-env",
+    "--json",
+    unpack(args),
+  })
+end
+
 ---Enter a development environment a la `nix develop`
 ---@param args string[] Extra arguments to pass to `nix print-dev-env`
 ---@return nil

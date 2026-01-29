@@ -43,6 +43,21 @@ M.enter_dev_env({cmd}, {args})                       *nix-develop.enter_dev_env*
 <
 
 
+M.devenv_shell({args})                                *nix-develop.devenv_shell*
+    Enter a development environment a la `devenv shell`
+
+    Parameters: ~
+        {args}  (string[])  Extra arguments to pass to `devenv print-dev-env`
+
+    Returns: ~
+        (nil)
+
+    Usage: ~
+>lua
+        require("nix-develop").devenv_shell({"--profile", "foo"})
+<
+
+
 M.nix_develop({args})                                  *nix-develop.nix_develop*
     Enter a development environment a la `nix develop`
 
