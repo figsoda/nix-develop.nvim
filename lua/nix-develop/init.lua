@@ -18,7 +18,7 @@
 local M = {}
 
 local levels = vim.log.levels
-local loop = vim.loop
+local loop = vim.uv or vim.loop
 
 -- workaround for "nvim_echo must not be called in a lua loop callback"
 local notify = function(msg, level)
